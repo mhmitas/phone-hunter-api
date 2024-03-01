@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>phone hunter</title>
+
+    <!-- tailwind and dausyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- custom style -->
+    <style>
+        body {
+            color: whitesmoke;
+        }
+    </style>
+</head>
+
+<body>
+    </header>
+    <main class="container mx-auto my-4">
+        <h1 class="text-3xl m-8">Phone Hunting</h1>
+
+        <section>
+            <div class="bg-gray-200 p-4 m-8 rounded-xl">
+                <input id="search-field" type="text" placeholder="Search Here"
+                    class="input input-bordered input-secondary w-full max-w-xs" />
+                <button class="btn btn-primary" onclick="handleSearch()">Search</button>
+            </div>
+        </section>
+
+        <section>
+
+            <!-- loding -->
+            <div id="loading-spinner" class="m-40 text-center hidden">
+                <span class="loading loading-spinner text-info loading-lg"></span>
+            </div>
+
+            <div id="phones-container" class=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-max mx-auto">
+                <!-- product will come here -->
+            </div>
+            <div id="show-all-container" class="hidden m-10">
+                <button class="btn btn-accent">Show All</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- scripts -->
+    <script src="scripts/phone.js"></script>
+</body>
+
+</html>
