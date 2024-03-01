@@ -1,4 +1,4 @@
-const loadPhone = async (searchText) => {
+const loadPhone = async (searchText = '13') => {
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
     const data = await res.json()
     const phones = data.data
@@ -9,7 +9,6 @@ const loadPhone = async (searchText) => {
 
 
 const displayPhones = phones => {
-    console.log(phones)
     const phonesContainer = document.getElementById('phones-container')
 
     phonesContainer.textContent = '';
@@ -24,7 +23,7 @@ const displayPhones = phones => {
     }
 
     phones.forEach(phone => {
-        console.log(phone)
+        // console.log(phone)
         const phoneCard = document.createElement('div')
         phoneCard.classList = 'card w-96 bg-white shadow-xl text-black pt-4'
         phoneCard.innerHTML = `
@@ -35,7 +34,7 @@ const displayPhones = phones => {
             }</h2>
             <p>${phone.slug}</p>
             <div class="card-actions justify-center">
-                <button onclick="handleShowDetail()" class="btn btn-primary">Show Details</button>
+                <button onclick="handleShowDetail('${phone.slug}')" class="btn btn-primary">Show Details</button>
             </div>
         </div>
         `
@@ -52,7 +51,6 @@ const handleSearch = () => {
     toggleLoadingSpinner(true)
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
-    console.log(searchText)
     loadPhone(searchText)
 }
 
@@ -66,7 +64,41 @@ const toggleLoadingSpinner = (isLoading) => {
 }
 
 
-const handleShowDetail = (id) => {
-    console.log('clicked show detail')
-    
+const handleShowDetail = async (id) => {
+    // console.log('clicked show detail', id)
+    // load single phone data
+    const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
+    const data = await res.json()
+    const phone = data.data;
+    showPhoneDetails(phone)
+    console.log(phone)
 }
+
+
+const showPhoneDetails = (phone) => {
+
+    // show the modal
+    show_details_modal.showModal()
+
+    const showDetailPhoneName = document.getElementById('show-detail-phone-name');
+    showDetailPhoneName.innerText = phone.name;
+
+    const showDetailContainer = document.getElementById('show-detail-container')
+
+    showDetailContainer.innerHTML= `
+        <img src= "${phone.image}">
+    `
+
+}
+
+
+
+
+
+
+
+
+
+
+
+loadPhone()
